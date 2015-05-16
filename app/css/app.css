@@ -1,0 +1,21 @@
+.container{
+	margin-left:21px;
+}
+.adImage{
+	width: 80%;
+	height: 80%;
+	border-radius: 5px;
+
+}
+.box{
+	border: 2px grey dotted;
+	background-color: #D1D1D1;
+	padding:5px;
+	margin: 10px;
+}
+.selected {
+	background-color:lightblue;
+}
+.sidebar-menu{
+	list-style-type: none;
+}

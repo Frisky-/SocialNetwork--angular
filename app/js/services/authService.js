@@ -1,15 +1,42 @@
-app.factory('authService', ['$resource', 'baseServiceUrl', function ($resource, baseServiceUrl) {
-	function registerUser (user) {
-		return $resource(baseServiceUrl + "users/register")
-		.save(user);
+app.factory('authService', [  function () {
+	
+	var key = 'user';
+
+	function saveUserData (data) {
+		localStorage.setItem(key, angular.toJson(data));
 	}
 
-	function loginUser (user) {
-		return $resource(baseServiceUrl + "users/login")
-		.get(user);
+	function getUserData () {
+		return angular.fromJson(localStorage.getItem(key));
 	}
+
+	function getHeaders (argument) {
+		var headers = {};
+		var userData = getUserData();
+		if(userData){
+			headers.sessionToken = 'Bearer ' + getUserData().access_token;
+		}
+		return headers;
+	}
+
+	function logoutUser () {
+		localStorage.removeItem(key);
+	}
+
+	function isLoggedIn () {
+		return !!getUserData();
+	}
+
+	function getUserId (userId) {
+		return userId;
+	}
+
 	return {
-		register:registerUser,
-		login:loginUser
+		saveUser: saveUserData,
+		getUser: getUserData,
+		getHeaders: getHeaders,
+		logoutUser: logoutUser,
+		isLoggedIn: isLoggedIn,
+		getUserId: getUserId
 	};
 }])

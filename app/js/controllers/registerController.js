@@ -1,7 +1,7 @@
-app.controller('RegisterCtrl', ['$scope','authService', function ($scope, authService) {
+app.controller('RegisterCtrl', ['$scope','userData', function ($scope, userData) {
 	
 	$scope.register = function (user) {
 		console.log(user);
-		authService.register(user);
+		userData.register(user);
 	}
 }])

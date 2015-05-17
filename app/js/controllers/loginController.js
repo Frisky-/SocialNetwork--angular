@@ -1,7 +1,7 @@
-app.controller('LoginCtrl', ['$scope','authService', function ($scope, authService) {
+app.controller('LoginCtrl', ['$scope','userData', function ($scope, userData) {
 	
 	$scope.login = function (user) {
 		console.log(user);
-		authService.login(user);
+		userData.login(user);
 	}
 }])

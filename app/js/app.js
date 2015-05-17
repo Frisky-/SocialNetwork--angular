@@ -1,11 +1,12 @@
-var app = angular.module('snApp', ['ngRoute','ngResource','LocalStorageModule']);
+var app = angular.module('snApp', ['ngRoute','ngResource']);
 
 app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
 
 
-app.config(function ($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider',  function ($routeProvider, $locationProvider) {
 	$routeProvider.when('/',{
 			templateUrl:"templates/home.html",
-			controller:"RegisterCtrl"
+			controller:"HomeCtrl"
 		});
-});
+
+}]);

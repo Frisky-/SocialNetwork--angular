@@ -1,1 +1,2 @@
-<div ng-include="'includes/welcomePage.html'"></div>
+<div ng-include="'includes/welcomePage.html'" ng-if="!isLoggedIn"></div>
+<div ng-include="'includes/userHomeScreen.html'" ng-if="isLoggedIn"></div>

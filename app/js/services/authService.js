@@ -10,14 +10,16 @@ app.factory('authService', [  function () {
 		return angular.fromJson(localStorage.getItem(key));
 	}
 
-	function getHeaders (argument) {
-		var headers = {};
-		var userData = getUserData();
-		if(userData){
-			headers.sessionToken = 'Bearer ' + getUserData().access_token;
-		}
-		return headers;
-	}
+	 function getHeaders() {
+        var headers = {};
+        var userData = getUserData();
+
+        if (userData) {
+            headers.Authorization = 'Bearer ' + getUserData().access_token;
+        }
+
+        return headers;
+    }
 
 	function logoutUser () {
 		localStorage.removeItem(key);

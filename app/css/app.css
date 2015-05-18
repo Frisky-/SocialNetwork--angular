@@ -7,6 +7,12 @@
 	border-radius: 5px;
 
 }
+.avatarImage{
+	width: 60px;
+	height: 40px;
+	border-radius: 5px;
+	margin-top:5px;
+}
 .box{
 	border: 2px grey dotted;
 	background-color: #D1D1D1;
@@ -18,4 +24,18 @@
 }
 .sidebar-menu{
 	list-style-type: none;
+}
+.navbar-brand{
+	padding-top:6px;
+}
+.icons{
+	width: 23px;
+	height: 23px;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+	color:black;
+}
+.navbar-inverse{
+	background-color:gray;
 }

@@ -7,11 +7,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div ng-if="user.profileImageData != null">
-        <a ng-if=class="navbar-brand" href="#/"><img src="" ng-src="img/unknown_avatar_tn_sml.png" class="avatarImage"></a>
+      <div ng-if="user.profileImageData == 'null' || user.profileImageData == null">
+        <a class="navbar-brand" href="#/"><img src="" ng-src="img/unknown_avatar_tn_sml.png" class="avatarImage"></a>
       </div>
-       <div ng-if="user.profileImageData == null">
-        <a ng-if=class="navbar-brand" href="#/"><img src="" ng-src="{{user.profileImageData}}" class="avatarImage"></a>
+       <div ng-if="user.profileImageData != null && user.profileImageData != 'null'">
+        <a class="navbar-brand" href="#/"><img src="" ng-src="{{user.profileImageData}}" class="avatarImage"></a>
       </div>
     </div>
 
@@ -21,7 +21,7 @@
         <li><a href="#/"><img src="" ng-src="/img/speech-large.png" class='icons'></a></li>
         <li><a href="#"><img src="" ng-src="/img/users.png" class='icons'></a></li>
         <li><a href="#"><img src="" ng-src="/img/black-settings-256.png" class='icons'></a></li>
-        <li><a href="#"><img src="" ng-src="/img/key-1.png" class='icons'></a></li>
+        <li><a href="#/profile/password"><img src="" ng-src="/img/key-1.png" class='icons'></a></li>
         <li ng-click="logout()"><a href="#/" ><img src="" ng-src="/img/common_logout_signout_exit_-512.png" class='icons'></a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">

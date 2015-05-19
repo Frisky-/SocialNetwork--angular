@@ -1,0 +1,38 @@
+<header></header>
+<div class="jumbotron">
+  <h1 class='text-center'>Change Password</h1>
+</div>
+<div class="row">
+          <div class="col-lg-5 col-lg-offset-3">
+            <div class="well bs-component">
+              <form class="form-horizontal" ng-controller="RegisterCtrl">
+                <fieldset>
+
+                  <div class="form-group">
+                    <label for="inputRegPassword" class="col-lg-2 control-label">Old Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" id="inputRegPassword" placeholder="Password" ng-model="userPass.OldPassword">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputRegPassword" class="col-lg-2 control-label">New Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" id="inputRegPassword" placeholder="Password" ng-model="userPass.NewPassword">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputRegPassword" class="col-lg-2 control-label">Confirm Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" id="inputRegPassword" placeholder="Password" ng-model="userPass.confirmPassword">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary" ng-click="changePass(userPass)">Save Changes</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+          </div>
+          </div>
+      </div>	

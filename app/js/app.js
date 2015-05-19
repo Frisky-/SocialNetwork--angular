@@ -8,5 +8,9 @@ app.config(['$routeProvider', '$locationProvider',  function ($routeProvider, $l
 			templateUrl:"templates/home.html",
 			controller:"HomeCtrl"
 		});
+	$routeProvider.when('/profile/password',{
+			templateUrl:"templates/changePass.html",
+			controller:"ChangePassCtrl"
+		});
 
 }]);

@@ -4,6 +4,7 @@ app.controller('HeaderCtrl', ['$scope','profileData','userData','authService', f
 		.$promise
 		.then(function (data) {
 			$scope.user = data;
+			console.log($scope.user);
 		})
 	}
 

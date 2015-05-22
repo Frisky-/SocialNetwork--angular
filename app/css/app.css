@@ -39,3 +39,12 @@
 .navbar-inverse{
 	background-color:gray;
 }
+.profileImage-box > img{
+	width: 150px;
+	height: 150px;
+}
+
+.coverImage-box > img {
+	width: 300px;
+	height: 150px;
+}

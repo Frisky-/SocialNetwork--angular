@@ -1,0 +1,67 @@
+<header></header>
+<div class="jumbotron">
+  <h1 class='text-center'>Edit profile</h1>
+</div>
+        <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <div class="well bs-component">
+              <form class="form-horizontal">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="inputName" class="col-lg-2 control-label">Name</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" id="inputName" value="{{user.name}}" ng-model="editUser.name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" id="inputEmail" value="{{user.email}}" ng-model="editUser.email">
+                    </div>
+                  </div>
+                     <div class="form-group">
+                    <label class="col-lg-2 control-label">Gender</label>
+                    <div class="col-lg-10">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" ng-model="editUser.gender" checked="0">
+                          Male
+                        </label>
+                        <label>
+                          <input type="radio" name="optionsRadios" id="optionsRadios2" value="1" ng-model="editUser.gender">
+                          Female
+                        </label>
+                         <label>
+                          <input type="radio" name="optionsRadios" id="optionsRadios2" value="2" ng-model="editUser.gender">
+                          Other
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+					  <label for="image">Profile Image:</label>
+					  <input type="file" id="image" ng-model="editUser.profileImage" base-sixty-four-input
+					         onchange="angular.element(this).scope().profileImage(this)" 
+					         />
+					  <div class="profileImage-box">
+					      <p class="profileImage-box">Image Preview</p>
+					  </div>
+				  </p>
+				  <p>
+					  <label for="image">Cover Image:</label>
+					  <input type="file" id="image" ng-model="editUser.coverImage"
+					         onchange="angular.element(this).scope().coverImage(this)" file-model='coverImage' base-sixty-four-input/>
+					  <div class="coverImage-box">
+					      <p>Image Preview</p>
+					  </div>
+				  </p>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary" ng-click='editProfile(editUser)'>Submit</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
+          </div>
+        </div>

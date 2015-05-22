@@ -1,4 +1,4 @@
-app.factory('profileData', ['$resource','baseServiceUrl','authService', function ($resource,baseServiceUrl,authService) {
+app.factory('profileData', ['$resource','$route','baseServiceUrl','authService', function ($resource,$route,baseServiceUrl,authService) {
 
 
 
@@ -28,9 +28,33 @@ app.factory('profileData', ['$resource','baseServiceUrl','authService', function
             })
             .update(params);
 
+            resource.$promise
+                .then(function(data) {
+                    alert(data.message);
+                },
+                function (error) {
+                    alert(error.data.message)
+                });
+
+            return resource;
+        }
+
+    function editProfile(params) {
+    var headers = authService.getHeaders();
+    var resource = $resource({} , {},
+        {
+            update: {
+                url: baseServiceUrl + "me",
+                method: 'PUT',
+                headers: headers
+            }
+        })
+        .update(params);
+
         resource.$promise
             .then(function(data) {
                 alert(data.message);
+                $route.reload();
             },
             function (error) {
                 alert(error.data.message)
@@ -42,6 +66,7 @@ app.factory('profileData', ['$resource','baseServiceUrl','authService', function
 
 	return {
 		getProfileInfo: getProfileInfo,
-        changePass: changePass
+        changePass: changePass,
+        editProfile: editProfile
 	};
 }])

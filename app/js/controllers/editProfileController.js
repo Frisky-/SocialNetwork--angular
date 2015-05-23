@@ -6,8 +6,9 @@ app.controller('EditProfileCtrl', ['$scope','$resource','authService','profileDa
 			$scope.user = data;
 		})
 	}
+  
 	$scope.profileImage = null;
-    $scope.coverImage = null;
+  $scope.coverImage = null;
       
 	$scope.editProfile = function (params) {
 		var params = params;

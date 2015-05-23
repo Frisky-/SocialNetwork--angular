@@ -4,7 +4,6 @@ app.controller('HeaderCtrl', ['$scope','profileData','userData','authService', f
 		.$promise
 		.then(function (data) {
 			$scope.user = data;
-			console.log($scope.user);
 		})
 	}
 
@@ -12,4 +11,18 @@ app.controller('HeaderCtrl', ['$scope','profileData','userData','authService', f
 		userData.logout();
 	}
 
+	profileData.getFriendRequests()
+	.$promise
+	.then(function (data) {
+		$scope.requests = data;
+		console.log($scope.requests)
+	})
+
+	$scope.aproveRequest = function (id) {
+		profileData.aproveRequest(id)
+	}
+
+	$scope.rejectRequest = function (id) {
+		profileData.rejectRequest(id);
+	}
 }])

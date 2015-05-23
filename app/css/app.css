@@ -48,3 +48,63 @@
 	width: 300px;
 	height: 150px;
 }
+li {
+	display:inline;
+}
+#container {
+	border:solid 1px black;
+}
+.caption > a {
+	text-decoration: none;
+	color:white;
+}
+.imageHolder { position: relative; width: 285px; height: 175px; } 
+.imageHolder .caption { position: absolute;
+  width: 98px;
+  height: 0px;
+  bottom: 0px;
+  left: 0px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: center;
+  font-weight: bold; }
+
+ .requestsNumber {
+ 	position: absolute;
+	bottom: 6px;
+  	left: 27px;
+  	border-radius: 50%;
+	width: 20px;
+	height: 20px; 
+	background-color:red;
+	text-align: center;
+ }
+
+ .friendRequests {
+ 	position: absolute;
+ 	border:solid 1px black;
+ 	width: 300px;
+ 	background-color:gray;
+ }
+ .friendRequests > ul {
+ 	list-style: none;
+    float: right;
+  	margin-top: 16px;
+  	margin-left: -45px;
+  	width: 300px;
+ }
+ .friendRequests > ul > li {
+ 	display:block;
+ 	 height: 96px;
+  	line-height: 30px;
+  	color:black;
+  	  padding-bottom: 70px;
+ }
+ .friendRequests > ul > li > img {
+ 	width: 50px;
+ 	height: 50px;
+ 	vertical-align: text-top;
+ }
+  .friendRequests > ul > li > div {
+ 	display:inline;
+ }

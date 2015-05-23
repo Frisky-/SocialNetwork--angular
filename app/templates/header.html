@@ -19,7 +19,26 @@
       <ul class="nav navbar-nav">
         <li><a href="#/">{{user.name}}</a></li>
         <li><a href="#/"><img src="" ng-src="/img/speech-large.png" class='icons'></a></li>
-        <li><a href="#"><img src="" ng-src="/img/users.png" class='icons'></a></li>
+        <li>
+          <a href="" ng-if="requests.length > 0" ng-click="showRequests = ! showRequests"><img src="" ng-src="/img/users.png" class='icons'>
+            <div class="requestsNumber">{{requests.length}}</div>
+             <div class="friendRequests" ng-show="showRequests">
+            <ul>
+              <li ng-repeat="request in requests">
+                <img src="" ng-src="{{request.user.profileImageData}}">
+                <div>
+                  {{request.user.name}}<br>
+                  <button type="button" class="btn btn-success btn-xs" ng-click="aproveRequest(request.id)">Accept</button>
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="rejectRequest(request.id)">Reject</button>
+                </div>
+                
+              </li>
+            </ul>
+          </div>
+          </a>
+          <a href="#" ng-if="requests.length == 0"><img src="" ng-src="/img/users.png" class='icons'>
+          </a>
+        </li>
         <li><a href="#/profile"><img src="" ng-src="/img/black-settings-256.png" class='icons'></a></li>
         <li><a href="#/profile/password"><img src="" ng-src="/img/key-1.png" class='icons'></a></li>
         <li ng-click="logout()"><a href="#/" ><img src="" ng-src="/img/common_logout_signout_exit_-512.png" class='icons'></a></li>
@@ -32,3 +51,6 @@
     </div>
   </div>
 </nav>
+
+
+

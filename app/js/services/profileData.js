@@ -6,12 +6,12 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
         var headers = authService.getHeaders();
         var resource = $resource(baseServiceUrl + 'me', null,
             {
-                save: {
+                get: {
                     method: 'GET',
                     headers: headers
                 }
             })
-            .save();
+            .get();
             
            return resource; 
         }
@@ -62,11 +62,73 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
 
         return resource;
     }
-    
+
+    function getOwnFriends () {
+        var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'me/friends', null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers,
+                    isArray: true
+                }
+            })
+            .query()
+
+           return resource; 
+        }
+
+    function getFriendRequests () {
+        var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + '/me/requests', null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers,
+                    isArray: true
+                }
+            })
+            .query()
+
+           return resource; 
+        }
+    function aproveRequest(id) {
+    var headers = authService.getHeaders();
+    var resource = $resource({} , {},
+        {
+            update: {
+                url: baseServiceUrl + "me/requests/" + id + "?status=approved",
+                method: 'PUT',
+                headers: headers
+            }
+        })
+        .update(id);
+
+        return resource;
+    }
+
+    function rejectRequest(id) {
+    var headers = authService.getHeaders();
+    var resource = $resource({} , {},
+        {
+            update: {
+                url: baseServiceUrl + "me/requests/" + id + "?status=delete",
+                method: 'PUT',
+                headers: headers
+            }
+        })
+        .update(id);
+
+        return resource;
+    }
 
 	return {
 		getProfileInfo: getProfileInfo,
         changePass: changePass,
-        editProfile: editProfile
+        editProfile: editProfile,
+        getOwnFriends: getOwnFriends,
+        getFriendRequests: getFriendRequests,
+        aproveRequest: aproveRequest,
+        rejectRequest: rejectRequest
 	};
 }])

@@ -2,3 +2,23 @@
 <div class="jumbotron">
   <h1 class='text-center'>News Feed</h1>
 </div>
+<div class="row" ng-controller="userScreenCtrl">
+	<div class="col-lg-8">
+		{{name}}
+	</div>
+	<div class="col-lg-4">
+		<div id="container">
+			<h3>Friends - <a href="">{{ownFriends.length}}</a> total</h3>
+			<ul>
+				<li class="imageHolder" ng-repeat="friend in ownFriends" >
+					<img  src="" ng-src="{{friend.profileImageData}}" >
+					<div class="caption"><br><a href="">{{friend.name}}</a></div>
+				</li>
+			</ul>
+<!-- 			<div class="friendsPreview" ng-repeat="friend in ownFriends">
+				<img src="" ng-src="{{friend.profileImageData}}">
+				<p>{{friend.name}}</p>
+			</div>
+		</div>
+	</div>
+</div>

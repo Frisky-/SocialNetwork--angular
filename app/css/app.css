@@ -1,6 +1,4 @@
-.container{
-	margin-left:21px;
-}
+
 .adImage{
 	width: 80%;
 	height: 80%;
@@ -108,3 +106,25 @@ li {
   .friendRequests > ul > li > div {
  	display:inline;
  }
+ .autocompletepanel{
+ 	position: absolute;
+ 	border:solid 1px black;
+ 	width: 300px;
+ 	background-color:white;
+ 	font-weight: bold;
+ }
+  .autocompletepanel > div > a {
+	color:black;
+  }
+  .autocompletepanel > div {
+	height: 60px;
+	width: 278px;
+  }
+
+   .autocompletepanel > div > a > img {
+	height: 50px;
+	width: 50px;
+  }
+  .col-lg-4 {
+  	margin-top: 50px;
+  }

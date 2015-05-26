@@ -103,7 +103,8 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
             }
         })
         .update(id);
-
+        $route.reload();
+        
         return resource;
     }
 
@@ -118,6 +119,7 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
             }
         })
         .update(id);
+         $route.reload();
 
         return resource;
     }

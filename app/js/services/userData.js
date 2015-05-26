@@ -49,9 +49,25 @@ app.factory('userData', ['$resource', "$location", "$route", 'baseServiceUrl','a
 
            return resource; 
         }
+
+    function searchUsers (searchTerm) {
+	 	var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'users/search?searchTerm=' + searchTerm, null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers,
+                    isArray: true
+                }
+            })
+            .query()
+
+           return resource; 
+    }
 	return {
 		register:registerUser,
 		login:loginUser,
-		logout:logoutUser
+		logout:logoutUser,
+		search: searchUsers
 	};
 }])

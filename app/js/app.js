@@ -1,4 +1,4 @@
-var app = angular.module('snApp', ['ngRoute','ngResource','file-model','naif.base64']);
+var app = angular.module('snApp', ['ngRoute','ngResource','file-model','naif.base64','mgcrea.ngStrap','mgcrea.ngStrap.typeahead']);
 
 app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
 

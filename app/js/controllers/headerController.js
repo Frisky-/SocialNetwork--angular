@@ -15,7 +15,6 @@ app.controller('HeaderCtrl', ['$scope','profileData','userData','authService', f
 	.$promise
 	.then(function (data) {
 		$scope.requests = data;
-		console.log($scope.requests)
 	})
 
 	$scope.aproveRequest = function (id) {
@@ -25,4 +24,27 @@ app.controller('HeaderCtrl', ['$scope','profileData','userData','authService', f
 	$scope.rejectRequest = function (id) {
 		profileData.rejectRequest(id);
 	}
+	
+	// $scope.searchUser = function (searchTerm) {
+	// 		userData.search(searchTerm);
+	// }
+	
+	$scope.searchUser = function (searchTerm) {	
+		$scope.displaySearchResults = false;
+		if(searchTerm != undefined && searchTerm != ""){
+		userData.search(searchTerm)
+		.$promise
+		.then(function (data) {
+			if(data.length > 0){
+			$scope.searchResults = data;
+			console.log($scope.searchResults[0]);
+			$scope.displaySearchResults = true;
+			}else if(data.length = 0){
+				console.log(data.length)
+			}
+		})
+		}
+	}
+
+
 }])

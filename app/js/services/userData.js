@@ -64,10 +64,55 @@ app.factory('userData', ['$resource', "$location", "$route", 'baseServiceUrl','a
 
            return resource; 
     }
+
+    function getUserFullData (user) {
+    	var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'users/' + user, null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers
+                }
+            })
+            .query()
+
+           return resource; 
+    }
+
+    function getUserFriendsPreview (username) {
+    	var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'users/' + username + "/friends/preview", null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers
+                }
+            })
+            .query()
+
+           return resource; 
+    }
+    function getUserDetailedFriendsPreview (username) {
+    	var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'users/' + username + "/friends", null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers,
+                    isArray: true
+                }
+            })
+            .query()
+
+           return resource; 
+    }
 	return {
 		register:registerUser,
 		login:loginUser,
 		logout:logoutUser,
-		search: searchUsers
+		search: searchUsers,
+		userFullData: getUserFullData,
+		userFriendsPreview: getUserFriendsPreview,
+		userDetailedFriendsPreview:getUserDetailedFriendsPreview
 	};
 }])

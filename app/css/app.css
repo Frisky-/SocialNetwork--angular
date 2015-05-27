@@ -128,3 +128,20 @@ li {
   .col-lg-4 {
   	margin-top: 50px;
   }
+  .wallProfileImage{
+  	display:inline-block;
+  }
+  .wallProfileImage > img {
+  	width: 125px;
+  	height: 125px;
+  	margin: 70px 0px 0px 120px;
+  }
+  .wallProfileImage > span {
+  	  float: right;
+ 	 padding-top: 102px;
+ 	 padding-left:20px;
+  }
+  .wallProfileImage > span > h4 {
+  	color:white;
+  	text-shadow: -1px 0 black, 0 1px black, 2px 0 black, 0 -1px black;
+  }

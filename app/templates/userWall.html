@@ -1,0 +1,23 @@
+<header></header>
+<div class="jumbotron"  style="background-image: url({{fullData.coverImageData}}); height: 200px; width: auto; border: 1px solid black;">
+	<div class="wallProfileImage">
+		<img src="" ng-src="{{fullData.profileImageData}}" >
+		<span><h4>{{fullData.name}}</h4></span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-8">
+		{{name}}
+	</div>
+	<div class="col-lg-4">
+		<div id="container">
+			<h3>Friends - <a href="#/users/{{fullData.username}}/friends">{{userFriends.totalCount}}</a> total</h3>
+			<ul>
+				<li class="imageHolder" ng-repeat="friend in userFriends.friends" >
+					<img  src="" ng-src="{{friend.profileImageData}}" >
+					<div class="caption"><br><a href="">{{friend.name}}</a></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

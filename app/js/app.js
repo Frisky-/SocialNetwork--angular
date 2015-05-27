@@ -16,5 +16,13 @@ app.config(['$routeProvider', '$locationProvider',  function ($routeProvider, $l
 			templateUrl:"templates/editProfile.html",
 			controller:"EditProfileCtrl"
 		});
+	$routeProvider.when('/users/:username/friends',{
+			templateUrl:"templates/friends.html",
+			controller:"FriendsCtrl"
+		});
+	$routeProvider.when('/users/:username',{
+			templateUrl:"templates/userWall.html",
+			controller:"UserWallCtrl"
+		});
 
 }]);

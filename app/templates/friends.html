@@ -1,0 +1,26 @@
+<header></header>
+<div class="jumbotron">
+  <h1 class='text-center'>{{fullData.name}} - Friends ({{userDetailedFriends.length}} total)</h1>
+</div>
+<div class="row">
+	<div class="col-lg-3 col-lg-offset-5">
+		<form class="navbar-form navbar-right" role="search">
+		  <div class="form-group">
+		  	<label>Name filter:</label>
+		    <input type="text" class="form-control" placeholder="Search" ng-model="searchName">
+		  </div>
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-3">
+		<ul>
+			<li class="imageHolder" ng-repeat="friend in userDetailedFriends | filter:searchName"  >
+				<a href="#/users/{{friend.username}}">
+					<img  src="" ng-src="{{friend.profileImageData}}" >
+					<div class="caption"><br><a href="">{{friend.name}}</a></div>
+				</a>	
+			</li>
+		</ul>
+	</div>
+</div>

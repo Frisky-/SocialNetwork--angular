@@ -1,6 +1,10 @@
-var app = angular.module('snApp', ['ngRoute','ngResource','file-model','naif.base64','mgcrea.ngStrap','mgcrea.ngStrap.typeahead']);
+var app = angular.module('snApp', ['ngRoute','ngResource','file-model','naif.base64','mgcrea.ngStrap','infinite-scroll']);
 
-app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
+app.constant({
+	'baseServiceUrl': 'http://softuni-social-network.azurewebsites.net/api/',
+	'DEFAULT_IMAGE' : 'img/unknown_avatar_tn_sml.png',
+	'PAGE_SIZE' : 5
+});
 
 
 app.config(['$routeProvider', '$locationProvider',  function ($routeProvider, $locationProvider) {

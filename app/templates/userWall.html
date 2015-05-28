@@ -1,20 +1,41 @@
 <header></header>
 <div class="jumbotron"  style="background-image: url({{fullData.coverImageData}}); height: 200px; width: auto; border: 1px solid black;">
 	<div class="wallProfileImage">
-		<img src="" ng-src="{{fullData.profileImageData}}" >
+		<img src="" ng-if="fullData.profileImageData != null" ng-src="{{fullData.profileImageData}}" >
+		<img src="" ng-if="fullData.profileImageData == null" ng-src="{{defaultImage}}" >
 		<span><h4>{{fullData.name}}</h4></span>
 	</div>
 </div>
 <div class="row">
 	<div class="col-lg-8">
-		{{name}}
+		<div class="posts-content" infinite-scroll='loadPosts()' infinite-scroll-disabled='busy' infinite-scroll-distance='0' ng-show="postsData.length > 0">
+		    <div ng-repeat='post in postsData'>
+		    	<div class="modal-content">
+                    <div class="modal-header">
+                     	<img src="" ng-src="{{post.author.profileImageData}}">
+                     	<span><a href="#/users/{{post.author.username}}">{{post.author.name}}</a></span><br>
+                     	<span>{{post.date | date: "dd MMM yyyy HH:mm:ss"}}<span>
+                    </div>
+                    <div class="modal-body">
+                      <p>{{post.postContent}}</p>
+                    </div>
+                    <div class="modal-footer">
+                    
+                    </div>
+      			</div>
+		      	<div style='clear: both;'></div>
+		    </div> 
+	  	</div>
+	  	<div ng-show="postsData.length == 0" style="margin-left: auto;margin-right: auto;width: 25%;">Theres no posts yet...</div>
+	<div ng-show='busy' style="margin-left: auto;margin-right: auto;width: 11%;">Loading data...</div>
 	</div>
 	<div class="col-lg-4">
 		<div id="container">
 			<h3>Friends - <a href="#/users/{{fullData.username}}/friends">{{userFriends.totalCount}}</a> total</h3>
 			<ul>
 				<li class="imageHolder" ng-repeat="friend in userFriends.friends" >
-					<img  src="" ng-src="{{friend.profileImageData}}" >
+					<img ng-if="friend.profileImageData != null" ng-src="{{friend.profileImageData}}" >
+					<img ng-if="friend.profileImageData == null" ng-src="{{defaultImage}}" >
 					<div class="caption"><br><a href="">{{friend.name}}</a></div>
 				</li>
 			</ul>

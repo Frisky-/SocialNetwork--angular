@@ -106,6 +106,21 @@ app.factory('userData', ['$resource', "$location", "$route", 'baseServiceUrl','a
 
            return resource; 
     }
+    function getFriendWall (user,startPostId, pageSize) {
+        var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'users/' + user + '/wall?StartPostId=' + startPostId + '&PageSize=' + pageSize, null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers,
+                    isArray: true
+                }
+            })
+            .query()
+
+           return resource; 
+        }
+
 	return {
 		register:registerUser,
 		login:loginUser,
@@ -113,6 +128,7 @@ app.factory('userData', ['$resource', "$location", "$route", 'baseServiceUrl','a
 		search: searchUsers,
 		userFullData: getUserFullData,
 		userFriendsPreview: getUserFriendsPreview,
-		userDetailedFriendsPreview:getUserDetailedFriendsPreview
+		userDetailedFriendsPreview:getUserDetailedFriendsPreview,
+        getFriendWall : getFriendWall
 	};
 }])

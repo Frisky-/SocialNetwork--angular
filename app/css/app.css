@@ -52,14 +52,19 @@ li {
 #container {
 	border:solid 1px black;
 }
+#container > ul > li > img {
+  width: 100px;
+  height: 100px;
+}
 .caption > a {
 	text-decoration: none;
 	color:white;
 }
+
 .imageHolder { position: relative; width: 285px; height: 175px; } 
 .imageHolder .caption { position: absolute;
   width: 98px;
-  height: 0px;
+  height: 15px;
   bottom: 0px;
   left: 0px;
   color: white;
@@ -144,4 +149,21 @@ li {
   .wallProfileImage > span > h4 {
   	color:white;
   	text-shadow: -1px 0 black, 0 1px black, 2px 0 black, 0 -1px black;
+  }
+
+  .modal-content{
+     margin: auto;
+     width: 500px;
+     height: auto;  
+     margin-bottom: 45px;
+     top: 0; left: 0; bottom: 0; right: 0;
+  }
+
+  .modal-header > img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .posts-content{
+    margin-top:50px;
   }

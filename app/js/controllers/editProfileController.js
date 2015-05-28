@@ -1,5 +1,6 @@
 app.controller('EditProfileCtrl', ['$scope','$resource','authService','profileData', function($scope,$resource, authService,profileData){
-	if(authService.isLoggedIn() == true){
+	
+  if(authService.isLoggedIn() == true){
 		profileData.getProfileInfo()
 		.$promise
 		.then(function (data) {

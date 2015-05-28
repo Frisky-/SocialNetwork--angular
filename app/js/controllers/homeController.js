@@ -2,11 +2,11 @@ app.controller('HomeCtrl', ['$scope','authService','profileData', function ($sco
 	
 	$scope.isLoggedIn = authService.isLoggedIn();
 	
-	
+	if(authService.isLoggedIn() == true){
 	profileData.getProfileInfo()
 	.$promise
 	.then(function (data) {
 		$scope.username = data.username;
 	})
-	
-	}])
+	}
+}])	

@@ -78,6 +78,20 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
            return resource; 
         }
 
+    function getOwnFriendsPrewview () {
+        var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'me/friends/preview', null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers
+                }
+            })
+            .query()
+
+           return resource; 
+        }
+
     function getFriendRequests () {
         var headers = authService.getHeaders();
         var resource = $resource(baseServiceUrl + '/me/requests', null,
@@ -123,14 +137,32 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
 
         return resource;
     }
+    
+     function getNewsFeedPages (startPostId, pageSize) {
+        var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + '/me/feed?StartPostId=' + startPostId + '&PageSize=' + pageSize, null,
+            {
+                query: {
+                    method: 'GET',
+                    headers: headers,
+                    isArray: true
+                }
+            })
+            .query()
+
+           return resource; 
+        }
+
 
 	return {
 		getProfileInfo: getProfileInfo,
         changePass: changePass,
         editProfile: editProfile,
         getOwnFriends: getOwnFriends,
+        getOwnFriendsPreview: getOwnFriendsPrewview,
         getFriendRequests: getFriendRequests,
         aproveRequest: aproveRequest,
-        rejectRequest: rejectRequest
+        rejectRequest: rejectRequest,
+        getNewsFeed: getNewsFeedPages
 	};
 }])

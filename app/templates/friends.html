@@ -1,6 +1,35 @@
 <header></header>
-<div class="jumbotron">
-  <h1 class='text-center'>{{fullData.name}} - Friends ({{userDetailedFriends.length}} total)</h1>
+<div ng-if="ownInfo.username != username">
+	<div class="jumbotron" >
+	  <h1 class='text-center'>{{fullData.name}} - Friends ({{userDetailedFriends.length}} total)</h1>
+	</div>
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-5">
+			<form class="navbar-form navbar-right" role="search">
+			  <div class="form-group">
+			  	<label>Name filter:</label>
+			    <input type="text" class="form-control" placeholder="Search" ng-model="searchName">
+			  </div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+			<ul>
+				<li class="imageHolder" ng-repeat="friend in userDetailedFriends | filter:searchName"  >
+					<a href="#/users/{{friend.username}}">
+						<img ng-if="friend.profileImageData != null" ng-src="{{friend.profileImageData}}" >
+						<img ng-if="friend.profileImageData == null" ng-src="{{defaultImage}}" >
+						<div class="caption"><br><a href="">{{friend.name}}</a></div>
+					</a>	
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div ng-if="ownInfo.username == username">
+<div class="jumbotron" >
+  <h1 class='text-center'>{{ownInfo.name}} - Friends ({{ownFriends.length}} total)</h1>
 </div>
 <div class="row">
 	<div class="col-lg-3 col-lg-offset-5">
@@ -15,12 +44,14 @@
 <div class="row">
 	<div class="col-lg-6 col-lg-offset-3">
 		<ul>
-			<li class="imageHolder" ng-repeat="friend in userDetailedFriends | filter:searchName"  >
+			<li class="imageHolder" ng-repeat="friend in ownFriends | filter:searchName"  >
 				<a href="#/users/{{friend.username}}">
-					<img  src="" ng-src="{{friend.profileImageData}}" >
-					<div class="caption"><br><a href="">{{friend.name}}</a></div>
+					<img ng-if="friend.profileImageData != null" ng-src="{{friend.profileImageData}}" >
+					<img ng-if="friend.profileImageData == null" ng-src="{{defaultImage}}" >
+					<div class="caption"><br><a href="#/users/{{friend.username}}">{{friend.name}}</a></div>
 				</a>	
 			</li>
 		</ul>
 	</div>
+</div>
 </div>

@@ -50,7 +50,7 @@
       </div>
       <div class="autocompletepanel" ng-show="displaySearchResults">
           <div ng-repeat="result in searchResults">
-            <a href="">
+            <a href="#/users/{{result.username}}">
               <img src="" ng-src="{{result.profileImageData}}">
               {{result.name}}
             </a>

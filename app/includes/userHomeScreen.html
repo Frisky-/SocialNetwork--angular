@@ -16,9 +16,60 @@
                       <p>{{feed.postContent}}</p>
                     </div>
                     <div class="modal-footer">
-                    
+                    	<div class="row">
+                    		<div class="col-sm-5 col-sm-offset-6">
+                    			{{feed.likesCount}}
+                    			<a href="" ng-if="feed.liked == false" ng-click="likePost(feed.id)">
+                    				<img src="" ng-src="img/like.jpg">
+                    				<span>Like</span>
+                    			</a>
+                    			<a href="" ng-if="feed.liked == true" ng-click="unlikePost(feed.id)">
+                    				<img src="" ng-src="img/dislike.png">
+                    				<span>Unlike</span>
+                    			</a>
+								{{feed.totalCommentsCount}}
+								<a href="" ng-click="showPostComment = ! showPostComment"><img src="" ng-src="img/comment_icon.gif">Comment</a>
+                    		</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="postComment" ng-show="showPostComment">
+									<textarea name="" id="" cols="50" rows="5" ng-model="commentContent"></textarea><br>
+									<div class="btn-group" role="group" aria-label="...">
+									  <button type="button" class="btn btn-default" ng-click="addNewComment(feed.id,commentContent)">Submit</button>
+									</div>
+							</div>
+                    	</div>
                     </div>
                   </div>
+                  <div>
+      				<ul>
+      					<li ng-repeat="comment in feed.comments">
+      						<div class="well-comment">
+						      	<img class="media-object" src="" ng-src="{{comment.author.profileImageData}}">
+						      	<span><a href="">{{comment.author.name}}</a></span>
+      							<span>{{comment.date | date: "dd MMM yyyy HH:mm:ss"}}</span></br>
+      							<div class="row">
+								    <div class="col-md-10 col-md-offset-2">
+								    	{{comment.commentContent}}
+								    </div>
+								    <div class="row">
+								    	<div class="col-sm-5 col-sm-offset-7">
+								    		{{comment.likesCount}}
+								    		<a href="" ng-if="comment.liked == false" ng-click="likeComment(feed.id,comment.id)">
+			                    				<img src="" ng-src="img/like.jpg">
+			                    				<span>Like</span>
+			                    			</a>
+			                    			<a href="" ng-if="comment.liked == true" ng-click="unlikeComment(feed.id,comment.id)">
+			                    				<img src="" ng-src="img/dislike.png">
+			                    				<span>Unlike</span>
+			                    			</a>
+								    	</div>
+								    </div>
+								</div>
+      						</div>
+      					</li>
+      				</ul>
+      			</div>
 		      <div style='clear: both;'></div>
 		    </div> 
 		  </div>

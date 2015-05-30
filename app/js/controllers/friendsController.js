@@ -8,30 +8,30 @@ app.controller('FriendsCtrl', ['$scope','$routeParams','profileData','userData',
 	$scope.defaultImage = DEFAULT_IMAGE;
 
 	if($scope.currentUser != $scope.username){
-	userData.userFullData($scope.username)
-	.$promise
-	.then(function (data) {
-		$scope.fullData = data;
+		userData.userFullData($scope.username)
+		.$promise
+		.then(function (data) {
+			$scope.fullData = data;
 	})}
 
 	if($scope.currentUser != $scope.username){
-	userData.userDetailedFriendsPreview($scope.username)
-	.$promise
-	.then(function (data) {
-	$scope.userDetailedFriends = data;
+		userData.userDetailedFriendsPreview($scope.username)
+		.$promise
+		.then(function (data) {
+		$scope.userDetailedFriends = data;
 	})}
 
 	if($scope.currentUser == $scope.username){
-	profileData.getProfileInfo()
-	.$promise
-	.then(function (data) {
-		$scope.ownInfo = data;
+		profileData.getProfileInfo()
+		.$promise
+		.then(function (data) {
+			$scope.ownInfo = data;
 	})}
 
 	if($scope.currentUser == $scope.username){
-	profileData.getOwnFriends()
-	.$promise
-	.then(function (data) {
-		$scope.ownFriends = data;
+		profileData.getOwnFriends()
+		.$promise
+		.then(function (data) {
+			$scope.ownFriends = data;
 	})}
 }])

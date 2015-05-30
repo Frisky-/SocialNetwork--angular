@@ -1,4 +1,4 @@
-app.controller('userScreenCtrl', ['$scope','profileData','DEFAULT_IMAGE','PAGE_SIZE', function ($scope,profileData,DEFAULT_IMAGE,PAGE_SIZE) {
+app.controller('userScreenCtrl', ['$scope','profileData','postData','commentsData','DEFAULT_IMAGE','PAGE_SIZE', function ($scope,profileData,postData,commentsData,DEFAULT_IMAGE,PAGE_SIZE) {
 	
 	$scope.pageSize = PAGE_SIZE;
 	$scope.newsFeedData = [];
@@ -12,7 +12,6 @@ app.controller('userScreenCtrl', ['$scope','profileData','DEFAULT_IMAGE','PAGE_S
 			$scope.ownFriendsPreview = data;
 		})
 
-	$scope.count = 0;
 
 	$scope.loadFeeds = function () {
 		$scope.busy = true;
@@ -25,10 +24,30 @@ app.controller('userScreenCtrl', ['$scope','profileData','DEFAULT_IMAGE','PAGE_S
 		}
 		$scope.startPostId = $scope.newsFeedData[$scope.newsFeedData.length - 1].id;
 		$scope.busy = false;
-		$scope.count+= 5;
-		console.log($scope.count)
-
 		})	
+	}
+
+	$scope.addNewComment = function (postId,commentContent) {
+		$scope.comment = {
+			"commentContent" : commentContent
+		}
+		commentsData.postComment(postId,$scope.comment);
+	}
+
+	$scope.likePost = function (postId) {
+		postData.likePost(postId);
+	}
+
+	$scope.unlikePost = function (postId) {
+		postData.unlikePost(postId);
+	}
+
+	$scope.likeComment = function (postId, commentId) {
+		commentsData.likeComment(postId,commentId)
+	}
+
+	$scope.unlikeComment = function (postId, commentId) {
+		commentsData.unlikeComment(postId,commentId)
 	}
 	
 }])

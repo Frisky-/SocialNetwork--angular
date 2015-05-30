@@ -1,4 +1,4 @@
-app.controller('UserWallCtrl', ['$scope','$routeParams','userData','DEFAULT_IMAGE','PAGE_SIZE', function ($scope,$routeParams,userData,DEFAULT_IMAGE,PAGE_SIZE) {
+app.controller('UserWallCtrl', ['$scope','$routeParams','profileData','userData','postData','commentsData','DEFAULT_IMAGE','PAGE_SIZE', function ($scope,$routeParams,profileData,userData,postData,commentsData,DEFAULT_IMAGE,PAGE_SIZE) {
 
 	 if ($routeParams.username){
         $scope.username = $routeParams.username;
@@ -8,12 +8,29 @@ app.controller('UserWallCtrl', ['$scope','$routeParams','userData','DEFAULT_IMAG
     $scope.startPostId = '';
     $scope.busy = false;
 	$scope.defaultImage = DEFAULT_IMAGE;
+
+
 	
+	profileData.getProfileInfo()
+	.$promise
+	.then(function (data) {
+		$scope.ownProfileInfo = data;
+	})
+
+	$scope.previewData = function (user) {
+		$scope.prevData = {};
+		userData.userFullData(user)
+		.$promise
+		.then(function (data) {
+		$scope.prevData = data;
+		})
+	}
+
 	userData.userFullData($scope.username)
 	.$promise
 	.then(function (data) {
-	$scope.fullData = data;
-	})
+	$scope.userfullData = data;
+	})	
 	
 	userData.userFriendsPreview($scope.username)
 	.$promise
@@ -21,11 +38,16 @@ app.controller('UserWallCtrl', ['$scope','$routeParams','userData','DEFAULT_IMAG
 		$scope.userFriends = data;
 	})
 
+
 	userData.userDetailedFriendsPreview($scope.username)
 	.$promise
 	.then(function (data) {
 		$scope.userDetailedFriends = data;
 	})
+
+	$scope.sendRequest = function () {
+		profileData.sendRequest($scope.username);
+	}
 
 	$scope.loadPosts = function () {
 		$scope.busy = true;
@@ -33,12 +55,43 @@ app.controller('UserWallCtrl', ['$scope','$routeParams','userData','DEFAULT_IMAG
 		.$promise
 		.then(function (data) {
 		$scope.posts = data;
-		console.log($scope.posts)
 		for (var i = 0; i < $scope.posts.length; i++){
 			$scope.postsData.push($scope.posts[i]);
 		}
-		$scope.startPostId = $scope.postsData[$scope.postsData.length - 1].id;
-		$scope.busy = false;
+		if($scope.postsData.length > 0){
+			$scope.startPostId = $scope.postsData[$scope.postsData.length - 1].id;
+			$scope.busy = false;
+		}
 		})	
+	}
+
+	$scope.addNewPost = function (postContent) {
+		$scope.params = {
+			'postContent' : postContent,
+			'username' : $scope.username
+		}
+	}
+
+	$scope.addNewComment = function (postId,commentContent) {
+		$scope.comment = {
+			"commentContent" : commentContent
+		}
+		commentsData.postComment(postId,$scope.comment);
+	}
+
+	$scope.likePost = function (postId) {
+		postData.likePost(postId);
+	}
+
+	$scope.unlikePost = function (postId) {
+		postData.unlikePost(postId);
+	}
+
+	$scope.likeComment = function (postId, commentId) {
+		commentsData.likeComment(postId,commentId)
+	}
+
+	$scope.unlikeComment = function (postId, commentId) {
+		commentsData.unlikeComment(postId,commentId)
 	}
 }])

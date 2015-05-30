@@ -1,9 +1,12 @@
 <header></header>
-<div class="jumbotron"  style="background-image: url({{fullData.coverImageData}}); height: 200px; width: auto; border: 1px solid black;">
+<div class="jumbotron"  style="background-image: url({{userfullData.coverImageData}}); height: 200px; width: auto; border: 1px solid black;">
 	<div class="wallProfileImage">
-		<img src="" ng-if="fullData.profileImageData != null" ng-src="{{fullData.profileImageData}}" >
-		<img src="" ng-if="fullData.profileImageData == null" ng-src="{{defaultImage}}" >
-		<span><h4>{{fullData.name}}</h4></span>
+		<img src="" ng-if="userfullData.profileImageData != null" ng-src="{{userfullData.profileImageData}}" >
+		<img src="" ng-if="userfullData.profileImageData == null" ng-src="{{defaultImage}}" >
+		<span ng-if="userfullData.isFriend == false && userfullData.hasPendingRequest != true"><a href="" ng-click="sendRequest()" class="btn btn-success">Send Request</a></span>
+		<span ng-if="userfullData.hasPendingRequest == true"><h3><span class="label label-default">Pending friend request</span></h3></span>
+		<span ng-if="userfullData.isFriend == true"><h3><span class="label label-default">Friend</span></h3></span>
+		<span><h4>{{userfullData.name}}</h4></span>
 	</div>
 </div>
 <div class="row">
@@ -20,23 +23,100 @@
                       <p>{{post.postContent}}</p>
                     </div>
                     <div class="modal-footer">
-                    
+                    	<div class="row">
+                    		<div class="col-sm-5 col-sm-offset-6">
+                    			{{post.likesCount}}
+                    			<a href="" ng-if="post.liked == false" ng-click="likePost(post.id)">
+                    				<img src="" ng-src="img/like.jpg">
+                    				<span>Like</span>
+                    			</a>
+                    			<a href="" ng-if="post.liked == true" ng-click="unlikePost(post.id)">
+                    				<img src="" ng-src="img/dislike.png">
+                    				<span>Unlike</span>
+                    			</a>
+								{{post.totalCommentsCount}}
+								<a href="" ng-click="showPostComment = ! showPostComment"><img src="" ng-src="img/comment_icon.gif">Comment</a>
+                    		</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="postComment" ng-show="showPostComment">
+									<textarea name="" id="" cols="50" rows="5" ng-model="commentContent"></textarea><br>
+									<div class="btn-group" role="group" aria-label="...">
+									  <button type="button" class="btn btn-default" ng-click="addNewComment(post.id,commentContent)">Submit</button>
+									</div>
+							</div>
+                    	</div>
                     </div>
+      			</div>
+      			<div>
+      				<ul>
+      					<li ng-repeat="comment in post.comments">
+      						<div class="well-comment">
+						      	<img class="media-object" src="" ng-src="{{comment.author.profileImageData}}">
+						      	<span><a href=""  ng-mouseenter=" showUser = ! showUser"><span ng-mouseenter="previewData(comment.author.username)">{{comment.author.name}}</span></a></span>
+      							<span>{{comment.date | date: "dd MMM yyyy HH:mm:ss"}}</span></br>
+      							<div class="row">
+								    <div class="col-md-10 col-md-offset-2">
+								    	{{comment.commentContent}}
+								    </div>
+								    <div class="row">
+								    	<div class="col-sm-5 col-sm-offset-7">
+								    		{{comment.likesCount}}
+								    		<a href="" ng-if="comment.liked == false" ng-click="likeComment(post.id,comment.id)">
+			                    				<img src="" ng-src="img/like.jpg">
+			                    				<span>Like</span>
+			                    			</a>
+			                    			<a href="" ng-if="comment.liked == true" ng-click="unlikeComment(post.id,comment.id)">
+			                    				<img src="" ng-src="img/dislike.png">
+			                    				<span>Unlike</span>
+			                    			</a>
+								    	</div>
+								    </div>
+								</div>
+								<div class="showUser" ng-show="showUser" ng-mouseleave="showUser = ! showUser" ng-if="ownProfileInfo.username != prevData.username">
+									<img src="" ng-src="{{prevData.profileImageData}}" style="width:40px; height:40px">
+									{{prevData.name}}
+									<span ng-if="prevData.isFriend == false && prevData.hasPendingRequest != true">
+										<a href="" ng-click="sendRequest()" class="btn btn-success">Send Request</a></span>
+									<span ng-if="prevData.hasPendingRequest == true"><h3><span class="label label-default">Pending friend request</span></h3></span>
+									<span ng-if="prevData.isFriend == true"><h3><span class="label label-default">Friend</span></h3></span>
+								</div>
+      						</div>
+      					</li>
+      				</ul>
       			</div>
 		      	<div style='clear: both;'></div>
 		    </div> 
 	  	</div>
-	  	<div ng-show="postsData.length == 0" style="margin-left: auto;margin-right: auto;width: 25%;">Theres no posts yet...</div>
-	<div ng-show='busy' style="margin-left: auto;margin-right: auto;width: 11%;">Loading data...</div>
+	  	<div ng-if="postsData.length == 0" style="margin-left: auto;margin-right: auto;width: 25%;">Theres no posts yet...</div>
+	<div ng-if="postsData.length > 0" ng-show='busy' style="margin-left: auto;margin-right: auto;width: 11%;">Loading data...</div>
 	</div>
 	<div class="col-lg-4">
+		<div class="well bs-component">
+              <form class="form-horizontal">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="textArea" class="col-lg-2 control-label">Message</label>
+                    <div class="col-lg-10">
+                      <textarea class="form-control" rows="3" id="textArea" ng-model="postContent"></textarea>
+                      <span class="help-block">as {{ownProfileInfo.name}}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary" ng-click="addNewPost(postContent)">Submit</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+          </div>
 		<div id="container">
 			<h3>Friends - <a href="#/users/{{fullData.username}}/friends">{{userFriends.totalCount}}</a> total</h3>
 			<ul>
 				<li class="imageHolder" ng-repeat="friend in userFriends.friends" >
 					<img ng-if="friend.profileImageData != null" ng-src="{{friend.profileImageData}}" >
 					<img ng-if="friend.profileImageData == null" ng-src="{{defaultImage}}" >
-					<div class="caption"><br><a href="">{{friend.name}}</a></div>
+					<div class="caption"><br><a href="#/users/{{friend.username}}">{{friend.name}}</a></div>
 				</li>
 			</ul>
 		</div>

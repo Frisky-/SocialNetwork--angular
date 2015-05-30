@@ -9,7 +9,7 @@ app.controller('EditProfileCtrl', ['$scope','$resource','authService','profileDa
 	}
   
 	$scope.profileImage = null;
-  $scope.coverImage = null;
+	$scope.coverImage = null;
       
 	$scope.editProfile = function (params) {
 		var params = params;

@@ -106,6 +106,26 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
 
            return resource; 
         }
+
+    function sendFriendRequest (username) {
+        var headers = authService.getHeaders();
+        var resource = $resource(baseServiceUrl + 'me/requests/' + username, null,
+            {
+                save: {
+                    method: 'POST',
+                    headers: headers
+                }
+            })
+            .save()
+
+            .$promise
+            .then(function () {
+                alert("Friend requests sended!");
+                $scope.$apply();
+            })
+
+           return resource; 
+    }
     function aproveRequest(id) {
     var headers = authService.getHeaders();
     var resource = $resource({} , {},
@@ -127,7 +147,7 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
     var resource = $resource({} , {},
         {
             update: {
-                url: baseServiceUrl + "me/requests/" + id + "?status=delete",
+                url: baseServiceUrl + "me/requests/" + id + "?status=rejected",
                 method: 'PUT',
                 headers: headers
             }
@@ -161,6 +181,7 @@ app.factory('profileData', ['$resource','$route','baseServiceUrl','authService',
         getOwnFriends: getOwnFriends,
         getOwnFriendsPreview: getOwnFriendsPrewview,
         getFriendRequests: getFriendRequests,
+        sendRequest : sendFriendRequest,
         aproveRequest: aproveRequest,
         rejectRequest: rejectRequest,
         getNewsFeed: getNewsFeedPages

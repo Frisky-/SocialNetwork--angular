@@ -28,5 +28,6 @@ app.config(['$routeProvider', '$locationProvider',  function ($routeProvider, $l
 			templateUrl:"templates/userWall.html",
 			controller:"UserWallCtrl"
 		});
+	$routeProvider.otherwise({ redirectTo: '/' })
 
 }]);
